@@ -28,7 +28,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs = require("fs");
 const node_path = require("path");
 const glob = require("glob2");
-const DEFAULTINPSUFFIX = '_UG', DEFAULTOUTPREFIX = 'ug_', SCRIPTNAME = 'id-uglifier', VERSION = '0.1.1'; // @TIP: keep it sync with package.json version
+const DEFAULTINPSUFFIX = '_UG', DEFAULTOUTPREFIX = 'ug_', SCRIPTNAME = 'id-uglifier', VERSION = '0.1.2'; // @TIP: keep it sync with package.json version
 var opts = {
     isActive: true,
     isVerbose: false,

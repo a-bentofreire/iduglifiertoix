@@ -49,7 +49,7 @@ Where the options are:
     -version         version  
 ```
 
-## Examples
+# Examples
 
 `id-uglifier -in in-folder -out out-folder -m tests/outmap.txt tests/in-folder/**`  
 
@@ -74,3 +74,7 @@ output will be `tests/in-folder/test-input.out.js`
 # License
 
 [MIT License+uuid License](https://github.com/a-bentofreire/uuid-licenses/blob/master/MIT-uuid-license.md)
+
+# Copyright
+
+(c) 2018 Alexandre Bento Freire
