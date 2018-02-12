@@ -1,0 +1,5 @@
+# this is a comment
+# leave the id with spaces before and after for testing
+  test_mapping_var  
+another_test_mapping_var
+_map_class

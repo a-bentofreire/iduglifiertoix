@@ -1,0 +1,53 @@
+{
+  "name": "id-uglifier",
+  "displayName": "id-uglifier",
+  "description": "Code Uglifier",
+  "version": "0.1.1",
+  "publisher": "a-bentofreire",
+  "keywords": [
+    "code",
+    "uglifier",
+    "obfuscate"
+  ],
+  "readme": "README.md",
+  "readmeFilename": "README.md",
+  "author": {
+    "name": "Alexandre Bento Freire",
+    "email": "code@a-bentofreire.com",
+    "url": "https://github.com/a-bentofreire"
+  },
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "engines": {
+    "node": "*"
+  },
+  "bin": {
+    "id-uglifier": "id-uglifier.js"
+  },
+  "homepage": "https://github.com/a-bentofreire/id-uglifier",
+  "bugs": "https://github.com/a-bentofreire/id-uglifier/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/a-bentofreire/id-uglifier"
+  },
+  "main": "id-uglifier.js",
+  "dependencies": {
+    "glob2": "^7.0.6"
+  },
+  "devDependencies": {
+    "@types/node": "^9.4.4",
+    "@types/glob": "^5.0.35",
+    "typescript": "^2.6.1"
+  },
+  "optionalDependencies": {},
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "clean-tests": "rm -rf tests/out-folder && rm -f tests/in-folder/*out* && rm -f tests/in-folder/css/scss/*out*",
+    "test-usage": "node id-uglifier",
+    "test-version": "node id-uglifier -version",
+    "test-basic": "node id-uglifier -in in-folder -out out-folder -m tests/outmap.txt 'tests/in-folder/**'",
+    "test-advanced": "node id-uglifier -noopt -in in-folder -out out-folder -ins . -outp ug__ -idfile tests/idlist.txt -m tests/outmap.json 'tests/in-folder/**'",
+    "test-in-folder": "node id-uglifier -noopt -in '\\.(\\w+)$' -out '.out.$1' 'tests/in-folder/**'",
+    "test-globs-from-file": "node id-uglifier -v -in in-folder -out out-folder -m tests/outmap.txt @tests/glob-list.txt"
+  }
+}
