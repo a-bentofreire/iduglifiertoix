@@ -2,7 +2,7 @@
   "name": "id-uglifier",
   "displayName": "id-uglifier",
   "description": "Code Uglifier",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "publisher": "a-bentofreire",
   "keywords": [
     "code",
@@ -31,11 +31,13 @@
   },
   "main": "id-uglifier.js",
   "dependencies": {
-    "glob2": "^7.0.6"
+    "glob2": "^7.0.6",
+    "minimatch": "^3.0.4"
   },
   "devDependencies": {
-    "@types/node": "^9.4.4",
     "@types/glob": "^5.0.35",
+    "@types/minimatch": "^3.0.3",
+    "@types/node": "^9.4.4",
     "typescript": "^2.6.1"
   },
   "optionalDependencies": {},
@@ -46,7 +48,7 @@
     "test-usage": "node id-uglifier",
     "test-version": "node id-uglifier -version",
     "test-basic": "node id-uglifier -in in-folder -out out-folder -m tests/outmap.txt 'tests/in-folder/**'",
-    "test-advanced": "node id-uglifier -noopt -in in-folder -out out-folder -ins . -outp ug__ -idfile tests/idlist.txt -m tests/outmap.json 'tests/in-folder/**'",
+    "test-advanced": "node id-uglifier -noopt -in in-folder -out out-folder -ins . -outp ug__ -idfile tests/idlist.txt -m tests/outmap.json -e '*.css' 'tests/in-folder/**'",
     "test-in-folder": "node id-uglifier -noopt -in '\\.(\\w+)$' -out '.out.$1' 'tests/in-folder/**'",
     "test-globs-from-file": "node id-uglifier -v -in in-folder -out out-folder -m tests/outmap.txt @tests/glob-list.txt"
   }

@@ -1,39 +1,22 @@
 #!/usr/bin/env node
 'use strict';
 // uuid: aea0e6d3-6a0d-4fef-a9f4-a64022b0299b
-/**
- * @preserve Copyright (c) 2018 Alexandre Bento Freire. All rights reserved.
- * @author Alexandre Bento Freire
- *
- * Permission is hereby granted, free of charge, to any person obtaining a
- * copy of this software and associated documentation files (the "Software"),
- * to deal in the Software without restriction, including without limitation
- * the rights to use, copy, modify, merge, publish, distribute, sublicense,
- * and/or sell copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice, the uuid, and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
- */
+
+// --------------------------------------------------------------------
+// Copyright (c) 2018 Alexandre Bento Freire. All rights reserved.
+// Licensed under the MIT License+uuid License. See License.txt for details
+// --------------------------------------------------------------------
 
 import * as fs from 'fs';
 import * as node_path from 'path';
 import * as glob from 'glob2';
+import * as minimatch from 'minimatch';
 
 const
   DEFAULTINPSUFFIX = '_UG',
   DEFAULTOUTPREFIX = 'ug_',
   SCRIPTNAME = 'id-uglifier',
-  VERSION = '0.1.2'; // @TIP: keep it sync with package.json version
+  VERSION = '0.2.0'; // @TIP: keep it sync with package.json version
 
 var opts = {
   isActive: true,
@@ -63,6 +46,10 @@ function printUsage() {
   Where the options are:
   -in pattern      input filename regex pattern
   -out pattern     output filename pattern
+  -e exclude-files this is a glob pattern [https://github.com/isaacs/minimatch]
+                   that excludes files from being processed.
+                   Use multiple times to exclude multiple patterns or
+                   start with @ to retrieve from a file
   -off             disabled the processing
   -noopt           doesn't optimizes output ids by frequency
   -m|-mapfile      name of map to generate with a list in-ids=out-ids
@@ -83,12 +70,13 @@ function printUsage() {
       outputs the to tests/out-folder/**
       and writes the id map to tests/outmap.txt
 
-  ${SCRIPTNAME} -noopt -in in-folder -out out-folder -ins . -ous ug__ -idfile tests/idlist.txt -m tests/outmap.json tests/in-folder/**
+  ${SCRIPTNAME} -noopt -in in-folder -out out-folder -ins . -ous ug__ -idfile tests/idlist.txt -m tests/outmap.json -e '*.css' tests/in-folder/**
 
-    Same as above but desactivates order id by frequency,
+    Same as above but deactivates order id by frequency,
     the out map is in .json format,
     loads an idlist file to uglify,
     the output prefix is ug__ instead of ug_,
+    excludes all the '.css' files
     and deactivates the default input prefix
 
   ${SCRIPTNAME} -noopt -in '\\.(\\w+)$' -out '.out.$1' tests/in-folder/**
@@ -241,6 +229,9 @@ function parseCommandline() {
   let argv = process.argv;
   let curArg: string;
   let inpFileGlobs: string[] = [];
+  let exclFileGlobs: string[] = [];
+  let exclMiniMatches: minimatch.IMinimatch[] = [];
+
 
   function peekArg(toRemove: boolean): string {
     if (argv.length > 0) {
@@ -305,14 +296,21 @@ function parseCommandline() {
         opts.inpIdListFileName = peekArg(true);
         break;
 
+      case '-e':
+        let exclFileGlob = peekArg(true);
+        if (exclFileGlob[0] === '@') {
+          let globExclFileName = exclFileGlob.substr(1);
+          exclFileGlobs = inpFileGlobs.concat(loadTextLines(globExclFileName));
+        } else {
+          exclFileGlobs.push(exclFileGlob);
+        }
+        break;
+
       default:
         do {
-          log(`curArg: ${curArg}`);
           if (curArg[0] === '@') {
             let globFileName = curArg.substr(1);
-            log(`globFileName ${globFileName}`);
             inpFileGlobs = inpFileGlobs.concat(loadTextLines(globFileName));
-            log(`inpFileGlobs: ${inpFileGlobs}`);
           } else {
             inpFileGlobs.push(curArg);
           }
@@ -323,8 +321,11 @@ function parseCommandline() {
     printUsage();
     return false;
   }
-  log(`inpFileGlobs: ${inpFileGlobs}`);
+
   let re = new RegExp(opts.inputFilePattern);
+
+  exclMiniMatches = exclFileGlobs.map(exclFileGlob => new minimatch.Minimatch(exclFileGlob, { matchBase: true }));
+
 
   // scans all the file names using glob
   if (opts.isVerbose) log(`input file globs: ${inpFileGlobs}`);
@@ -338,6 +339,11 @@ function parseCommandline() {
 
     gb.on('match', (inFileName: string) => {
       if (fs.lstatSync(inFileName).isFile()) {
+
+        if (exclMiniMatches.some(exclMiniMatch => exclMiniMatch.match(inFileName))) {
+          return;
+        }
+
         if (opts.isVerbose) log(`input fileName: ${inFileName}`);
         let outFileName = inFileName.replace(re, opts.outputFilePattern);
         if (inFileGlob !== outFileName) {
@@ -347,12 +353,11 @@ function parseCommandline() {
         else {
           log(`${inFileName} has the same output fileName`, true);
         }
-      } 
+      }
     });
     gb.on('end', () => {
       endCount++; // since glob might be racing, this garanties all the glob have finished
       if (endCount === inpFileGlobs.length) {
-        log(opts.workFileList);
         if (opts.isVerbose) log(`all globs have finished`);
         processFiles();
       }

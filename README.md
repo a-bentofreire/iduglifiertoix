@@ -35,6 +35,10 @@ Where the options are:
 ```
     -in pattern      input filename regex pattern  
     -out pattern     output filename pattern  
+    -e exclude-files this is a glob pattern [https://github.com/isaacs/minimatch]  
+                     that excludes files from being processed.  
+                     Use multiple times to exclude multiple patterns or  
+                     start with @ to retrieve from a file  
     -off             disabled the processing  
     -noopt           doesn't optimizes output ids by frequency  
     -m|-mapfile      name of map to generate with a list in-ids=out-ids  
@@ -55,14 +59,16 @@ Where the options are:
 
 Reads `tests/in-folder/**`, processes the ids,  
 outputs the to `tests/out-folder/**`  
-and writes the id map to tests/outmap.txt  
+and writes the id map to `tests/outmap.txt`  
+If `out-folder` doesn't exists, it creates it on the fly  
 
-`id-uglifier -noopt -in in-folder -out out-folder -ins . -ous ug__ -idfile tests/idlist.txt -m tests/outmap.json tests/in-folder/**`  
+`id-uglifier -noopt -in in-folder -out out-folder -ins . -ous ug__ -idfile tests/idlist.txt -m tests/outmap.json -e '*.css' tests/in-folder/**`  
 
-Same as above but desactivates order id by frequency,  
+Same as above but deactivates order id by frequency,  
 the out map is in .json format,  
 loads an idlist file to uglify,  
 the output prefix is ug__ instead of ug_,  
+excludes all the '.css' files  
 and disactivates the default input prefix  
 
 `id-uglifier -noopt -in '\\.(\\w+)$' -out '.out.$1' tests/in-folder/**`  
@@ -71,10 +77,32 @@ Writes the output to the same folder but adds  .out to the extension
 input is ``tests/in-folder/**``  
 output will be `tests/in-folder/test-input.out.js`  
 
+# Example Input/Output
+
+## Input
+```javascript
+function testFunc() {  
+    var _thisisavar_UG = 3;  
+    var highfreq_UG = 7;  
+    highfreq_UG++;  
+    highfreq_UG++;  
+}
+```
+
+## Output
+```javascript
+function testFunc() {  
+    var ug_1 = 3;  
+    var ug_0 = 7;  
+    ug_0++;  
+    ug_0++;  
+}
+```
+
 # License
 
 [MIT License+uuid License](https://github.com/a-bentofreire/uuid-licenses/blob/master/MIT-uuid-license.md)
 
-# Copyright
+# Copyrights
 
 (c) 2018 Alexandre Bento Freire
