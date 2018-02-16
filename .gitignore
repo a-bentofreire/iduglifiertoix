@@ -1,5 +1,5 @@
 private/
 node_modules/
-tests/**out*
-tests/*out*
+test/**out*
+test/*out*
 *.js.map

@@ -13,7 +13,7 @@
   "readmeFilename": "README.md",
   "author": {
     "name": "Alexandre Bento Freire",
-    "email": "code@a-bentofreire.com",
+    "email": "dev@a-bentofreire.com",
     "url": "https://github.com/a-bentofreire"
   },
   "license": "SEE LICENSE IN LICENSE.txt",
@@ -44,12 +44,12 @@
   "scripts": {
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "clean-tests": "rm -rf tests/out-folder && rm -f tests/in-folder/*out* && rm -f tests/in-folder/css/scss/*out*",
+    "clean-tests": "rm -rf test/out-folder && rm -f test/in-folder/*out* && rm -f test/in-folder/css/scss/*out*",
     "test-usage": "node id-uglifier",
     "test-version": "node id-uglifier -version",
-    "test-basic": "node id-uglifier -in in-folder -out out-folder -m tests/outmap.txt 'tests/in-folder/**'",
-    "test-advanced": "node id-uglifier -noopt -in in-folder -out out-folder -ins . -outp ug__ -idfile tests/idlist.txt -m tests/outmap.json -e '*.css' 'tests/in-folder/**'",
-    "test-in-folder": "node id-uglifier -noopt -in '\\.(\\w+)$' -out '.out.$1' 'tests/in-folder/**'",
-    "test-globs-from-file": "node id-uglifier -v -in in-folder -out out-folder -m tests/outmap.txt @tests/glob-list.txt"
+    "test-basic": "node id-uglifier -in in-folder -out out-folder -m test/outmap.txt 'test/in-folder/**'",
+    "test-advanced": "node id-uglifier -noopt -in in-folder -out out-folder -ins . -outp ug__ -idfile test/idlist.txt -m test/outmap.json -e '*.css' 'test/in-folder/**'",
+    "test-in-folder": "node id-uglifier -noopt -in '\\.(\\w+)$' -out '.out.$1' 'test/in-folder/**'",
+    "test-globs-from-file": "node id-uglifier -v -in in-folder -out out-folder -m test/outmap.txt @test/glob-list.txt"
   }
 }

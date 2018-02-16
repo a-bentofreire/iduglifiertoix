@@ -21,7 +21,7 @@ that id will be changed in the final output.
 
 # Installation
 
-`npm install id-uglifier`  
+`[sudo] npm install -g id-uglifier`  
 
 # Usage
 
@@ -55,14 +55,14 @@ Where the options are:
 
 # Examples
 
-`id-uglifier -in in-folder -out out-folder -m tests/outmap.txt tests/in-folder/**`  
+`id-uglifier -in in-folder -out out-folder -m test/outmap.txt test/in-folder/**`  
 
-Reads `tests/in-folder/**`, processes the ids,  
-outputs the to `tests/out-folder/**`  
-and writes the id map to `tests/outmap.txt`  
+Reads `test/in-folder/**`, processes the ids,  
+outputs the to `test/out-folder/**`  
+and writes the id map to `test/outmap.txt`  
 If `out-folder` doesn't exists, it creates it on the fly  
 
-`id-uglifier -noopt -in in-folder -out out-folder -ins . -ous ug__ -idfile tests/idlist.txt -m tests/outmap.json -e '*.css' tests/in-folder/**`  
+`id-uglifier -noopt -in in-folder -out out-folder -ins . -ous ug__ -idfile test/idlist.txt -m test/outmap.json -e '*.css' test/in-folder/**`  
 
 Same as above but deactivates order id by frequency,  
 the out map is in .json format,  
@@ -71,11 +71,11 @@ the output prefix is ug__ instead of ug_,
 excludes all the '.css' files  
 and disactivates the default input prefix  
 
-`id-uglifier -noopt -in '\\.(\\w+)$' -out '.out.$1' tests/in-folder/**`  
+`id-uglifier -noopt -in '\\.(\\w+)$' -out '.out.$1' test/in-folder/**`  
 
 Writes the output to the same folder but adds  .out to the extension  
-input is ``tests/in-folder/**``  
-output will be `tests/in-folder/test-input.out.js`  
+input is ``test/in-folder/**``  
+output will be `test/in-folder/test-input.out.js`  
 
 # Example Input/Output
 

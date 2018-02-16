@@ -2,10 +2,10 @@
 'use strict';
 // uuid: aea0e6d3-6a0d-4fef-a9f4-a64022b0299b
 
-// --------------------------------------------------------------------
+// ------------------------------------------------------------------------
 // Copyright (c) 2018 Alexandre Bento Freire. All rights reserved.
 // Licensed under the MIT License+uuid License. See License.txt for details
-// --------------------------------------------------------------------
+// ------------------------------------------------------------------------
 
 import * as fs from 'fs';
 import * as node_path from 'path';
@@ -64,13 +64,13 @@ function printUsage() {
   -version         version
 
   e.g.
-  ${SCRIPTNAME} -in in-folder -out out-folder -m tests/outmap.txt tests/in-folder/**
+  ${SCRIPTNAME} -in in-folder -out out-folder -m test/outmap.txt test/in-folder/**
 
-      Reads tests/in-folder/**, processes the ids,
-      outputs the to tests/out-folder/**
-      and writes the id map to tests/outmap.txt
+      Reads test/in-folder/**, processes the ids,
+      outputs the to test/out-folder/**
+      and writes the id map to test/outmap.txt
 
-  ${SCRIPTNAME} -noopt -in in-folder -out out-folder -ins . -ous ug__ -idfile tests/idlist.txt -m tests/outmap.json -e '*.css' tests/in-folder/**
+  ${SCRIPTNAME} -noopt -in in-folder -out out-folder -ins . -ous ug__ -idfile test/idlist.txt -m test/outmap.json -e '*.css' test/in-folder/**
 
     Same as above but deactivates order id by frequency,
     the out map is in .json format,
@@ -79,11 +79,11 @@ function printUsage() {
     excludes all the '.css' files
     and deactivates the default input prefix
 
-  ${SCRIPTNAME} -noopt -in '\\.(\\w+)$' -out '.out.$1' tests/in-folder/**
+  ${SCRIPTNAME} -noopt -in '\\.(\\w+)$' -out '.out.$1' test/in-folder/**
 
     Writes the output to the same folder but adds  .out to the extension
-    input is tests/in-folder/**
-    output will be tests/in-folder/test-input.out.js
+    input is test/in-folder/**
+    output will be test/in-folder/test-input.out.js
 `);
 
 }
@@ -324,7 +324,8 @@ function parseCommandline() {
 
   let re = new RegExp(opts.inputFilePattern);
 
-  exclMiniMatches = exclFileGlobs.map(exclFileGlob => new minimatch.Minimatch(exclFileGlob, { matchBase: true }));
+  exclMiniMatches = exclFileGlobs.map(exclFileGlob => 
+    new minimatch.Minimatch(exclFileGlob, { matchBase: true }));
 
 
   // scans all the file names using glob

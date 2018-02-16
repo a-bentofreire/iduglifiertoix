@@ -2,6 +2,6 @@
 *.js.map
 tsconfig.json
 node_modules/@types
-tests/
+test/
 private/
 .vscode/
