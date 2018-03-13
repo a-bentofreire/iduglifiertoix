@@ -10,7 +10,7 @@ var fs = require("fs");
 var node_path = require("path");
 var glob = require("glob2");
 var minimatch = require("minimatch");
-var DEFAULTINPSUFFIX = '_UG', DEFAULTOUTPREFIX = 'ug_', SCRIPTNAME = 'id-uglifier', VERSION = '0.2.0'; // @TIP: keep it sync with package.json version
+var DEFAULTINPSUFFIX = '_UG', DEFAULTOUTPREFIX = 'ug_', SCRIPTNAME = 'id-uglifier', VERSION = '0.2.1'; // @TIP: keep it sync with package.json version
 var opts = {
     isActive: true,
     isVerbose: false,
@@ -237,7 +237,9 @@ function parseCommandline() {
         return false;
     }
     var re = new RegExp(opts.inputFilePattern);
-    exclMiniMatches = exclFileGlobs.map(function (exclFileGlob) { return new minimatch.Minimatch(exclFileGlob, { matchBase: true }); });
+    exclMiniMatches = exclFileGlobs.map(function (exclFileGlob) {
+        return new minimatch.Minimatch(exclFileGlob, { matchBase: true });
+    });
     // scans all the file names using glob
     if (opts.isVerbose)
         log("input file globs: " + inpFileGlobs);
