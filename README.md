@@ -19,11 +19,11 @@ where the business logic is prepared from inception for id uglification,
 the extra prefix will give clues to the developers that  
 that id will be changed in the final output.  
 
-# Installation
+## Installation
 
 `[sudo] npm install -g id-uglifier`  
 
-# Usage
+## Usage
 
 `id-uglifier [options] input-file-globs`
 
@@ -53,7 +53,7 @@ Where the options are:
     -version         version  
 ```
 
-# Examples
+## Examples
 
 `id-uglifier -in in-folder -out out-folder -m test/outmap.txt test/in-folder/**`  
 
@@ -77,7 +77,7 @@ Writes the output to the same folder but adds  .out to the extension
 input is ``test/in-folder/**``  
 output will be `test/in-folder/test-input.out.js`  
 
-# Example Input/Output
+## Example Input/Output
 
 ## Input
 ```javascript
@@ -99,10 +99,10 @@ function testFunc() {
 }
 ```
 
-# License
+## License
 
-[MIT License+uuid License](https://github.com/a-bentofreire/uuid-licenses/blob/master/MIT-uuid-license.md)
+MIT License
 
-# Copyrights
+## Copyrights
 
-(c) 2018 Alexandre Bento Freire
+(c) 2018-2024 Alexandre Bento Freire

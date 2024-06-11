@@ -2,7 +2,7 @@
   "name": "id-uglifier",
   "displayName": "id-uglifier",
   "description": "Code Uglifier",
-  "version": "0.2.1",
+  "version": "0.2.3",
   "publisher": "a-bentofreire",
   "keywords": [
     "code",
@@ -16,14 +16,14 @@
     "email": "dev@a-bentofreire.com",
     "url": "https://github.com/a-bentofreire"
   },
-  "license": "SEE LICENSE IN LICENSE.txt",
+  "license": "MIT",
   "engines": {
     "node": "*"
   },
   "bin": {
     "id-uglifier": "id-uglifier.js"
   },
-  "homepage": "https://github.com/a-bentofreire/id-uglifier",
+  "homepage": "https://devpieces.a-bentofreire.com/projects/id-uglifier",
   "bugs": "https://github.com/a-bentofreire/id-uglifier/issues",
   "repository": {
     "type": "git",
