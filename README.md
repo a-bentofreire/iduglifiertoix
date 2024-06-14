@@ -1,6 +1,6 @@
 # Description
 
-id-uglifier is a 2-pass brute force code uglifier.  
+[id-uglifier](https://www.devpieces.com/projects/id-uglifier) is a 2-pass brute force code uglifier.  
   
 It works based on the raw assumption that every identifier that ends  
 with **_UG** is subject to uglification. It also accepts a table of identifiers to be uglified.  
@@ -80,6 +80,7 @@ output will be `test/in-folder/test-input.out.js`
 ## Example Input/Output
 
 ## Input
+
 ```javascript
 function testFunc() {  
     var _thisisavar_UG = 3;  
@@ -90,6 +91,7 @@ function testFunc() {
 ```
 
 ## Output
+
 ```javascript
 function testFunc() {  
     var ug_1 = 3;  
@@ -101,8 +103,8 @@ function testFunc() {
 
 ## License
 
-MIT License
+MIT
 
 ## Copyrights
 
-(c) 2018-2024 Alexandre Bento Freire
+(c) 2018-2024 [Alexandre Bento Freire](https://www.a-bentofreire.com)

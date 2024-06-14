@@ -2,7 +2,7 @@
   "name": "id-uglifier",
   "displayName": "id-uglifier",
   "description": "Code Uglifier",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "publisher": "a-bentofreire",
   "keywords": [
     "code",
@@ -23,7 +23,7 @@
   "bin": {
     "id-uglifier": "id-uglifier.js"
   },
-  "homepage": "https://devpieces.a-bentofreire.com/projects/id-uglifier",
+  "homepage": "https://www.devpieces.com/projects/id-uglifier",
   "bugs": "https://github.com/a-bentofreire/id-uglifier/issues",
   "repository": {
     "type": "git",
