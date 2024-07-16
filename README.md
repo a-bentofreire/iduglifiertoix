@@ -1,6 +1,6 @@
 # Description
 
-[id-uglifier](https://www.devpieces.com/projects/id-uglifier) is a 2-pass brute force code uglifier.  
+[id-uglifier](https://www.devtoix.com/en/projects/id-uglifier) is a 2-pass brute force code uglifier.  
   
 It works based on the raw assumption that every identifier that ends  
 with **_UG** is subject to uglification. It also accepts a table of identifiers to be uglified.  

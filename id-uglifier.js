@@ -9,7 +9,7 @@ var fs = require("fs");
 var node_path = require("path");
 var glob = require("glob2");
 var minimatch = require("minimatch");
-var DEFAULTINPSUFFIX = '_UG', DEFAULTOUTPREFIX = 'ug_', SCRIPTNAME = 'id-uglifier', VERSION = '0.2.1'; // @TIP: keep it sync with package.json version
+var DEFAULTINPSUFFIX = '_UG', DEFAULTOUTPREFIX = 'ug_', SCRIPTNAME = 'id-uglifier', VERSION = '0.2.5'; // @TIP: keep it sync with package.json version
 var opts = {
     isActive: true,
     isVerbose: false,

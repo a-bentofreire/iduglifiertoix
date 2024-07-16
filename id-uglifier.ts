@@ -14,7 +14,7 @@ const
   DEFAULTINPSUFFIX = '_UG',
   DEFAULTOUTPREFIX = 'ug_',
   SCRIPTNAME = 'id-uglifier',
-  VERSION = '0.2.1'; // @TIP: keep it sync with package.json version
+  VERSION = '0.2.5'; // @TIP: keep it sync with package.json version
 
 var opts = {
   isActive: true,
